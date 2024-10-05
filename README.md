@@ -7,7 +7,7 @@
 
 First clone the repository:
 ```bash
- git clone https://github.com/ocircleo/subdox.git
+ git clone https://github.com/ocircleo/onestore.git
 ```
 Then open the dir int the command line and enter the command:
 
@@ -19,10 +19,6 @@ After installation done, run it by:
 ```bash
 npm start
 ```
-
-## Repository
-
-For more details, check out the [GitHub repository](https://github.com/ocircleo/onestore).
 
 
 Author: Salman Hossain
