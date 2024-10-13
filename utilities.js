@@ -5,7 +5,8 @@ function pathMiddleware(req, res, next) {
   let date = new Date();
   let hour = date.getHours();
   let minutes = date.getMinutes();
-  let time = hour + ":" + (minutes < 10 ? "0" + minutes : minutes);
+  let sec = date.getSeconds();
+  let time = hour + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + sec;
   if (path == "/favicon.ico") return next();
   console.log({ path, method, time });
   next();
