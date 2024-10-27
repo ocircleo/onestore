@@ -19,6 +19,12 @@ function textWash(text) {
   let newText = text.filter((ele) => (filter.includes(ele) ? "" : ele));
   return newText.join("");
 }
+function textWashRegex(text) {
+  let filter = ["<", ">", "/", "|", "?", "#", "~", "*", `"`, `'`];
+  text = text.split("");
+  let newText = text.filter((ele) => (filter.includes(ele) ? "" : ele));
+  return newText.join("");
+}
 
 //takes an object and an array.
 //removes the keys from the object that is present int the array
@@ -35,5 +41,16 @@ function filterObj(obj, arr) {
 function ReturnMessage(error = false, message, result = {}) {
   return { error, message, result };
 }
-
-module.exports = { pathMiddleware, textWash, filterObj, ReturnMessage };
+function GenerateDataUrl(brand, model) {
+  brand = brand.trim();
+  model = model.trim();
+  return brand.replace(/ /g, "-") + "-" + model.replace(/ /g, "-");
+}
+module.exports = {
+  pathMiddleware,
+  textWash,
+  textWashRegex,
+  filterObj,
+  ReturnMessage,
+  GenerateDataUrl,
+};
