@@ -25,7 +25,7 @@ const schema = new mongoose.Schema({
     default: "https://tooltip-backend.vercel.app/assets/profile.jpg",
   },
   phone: {
-    type: Number,
+    type: String,
     required: true,
   },
   country: {

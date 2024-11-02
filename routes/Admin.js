@@ -27,13 +27,28 @@ AdminRoute.put("/update_product", async (req, res) => {
       new: true,
       runValidators: true,
     });
-    res.send(ReturnMessage(false, "Successfuly Laptop updated  ", result));
+    if (result)
+      res.send(ReturnMessage(false, "Successfuly Laptop updated  ", result));
+    res.send(ReturnMessage(true, "Sorry No Laptop Found ", null));
   } catch (error) {
     res.send(ReturnMessage(true, error.message));
   }
 });
-AdminRoute.delete("/delete_product", (req, res) => {
-  res.send("Welcome to the root of the application");
+AdminRoute.delete("/delete_product", async (req, res) => {
+  let { id } = req.body;
+
+  try {
+    let result = await LaptopModel.findByIdAndDelete(id);
+    if (result)
+      return res.send(
+        ReturnMessage(false, "Laptop deleted successfully ", result)
+      );
+    res.send(
+      ReturnMessage(true, "Sorry No Laptop Found or failed to delete", null)
+    );
+  } catch (error) {
+    res.send(ReturnMessage(true, error.message));
+  }
 });
 AdminRoute.get("/orders", (req, res) => {
   res.send("Welcome to the root of the application");

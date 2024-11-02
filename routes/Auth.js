@@ -16,7 +16,7 @@ AuthRoute.put("/auto_login", JwtVerify, AuthorizeUser, async (req, res) => {
     finalResPonse.token = token;
     res.send(finalResPonse);
   } catch (error) {
-    res.send(ReturnMessage(true, "Some Error happened, try again later"));
+    res.send(ReturnMessage(true, "Some Error happened, try again later", null));
   }
 });
 //tested
@@ -32,19 +32,20 @@ AuthRoute.put("/login", async (req, res) => {
     result = await UserModel.findOne(query);
     if (!result)
       return res.send(
-        ReturnMessage(true, "No user found by this email / phone")
+        ReturnMessage(true, "No user found by this email / phone", null)
       );
     passwordCheck = await BcryptComparer(result.password, password);
 
     //checks if the passwords matches
-    if (!passwordCheck) return res.send(ReturnMessage(true, "False Password"));
+    if (!passwordCheck)
+      return res.send(ReturnMessage(true, "False Password", null));
     //if password matches sends the result
     token = SignJwtFunction({ key, pass: result.password });
     finalResPonse = ReturnMessage(false, "Authenticated user", result);
     finalResPonse.token = token;
     return res.send(finalResPonse);
   } catch (error) {
-    res.send(ReturnMessage(true, "Some Error happened, try again later"));
+    res.send(ReturnMessage(true, error.message, null));
   }
 });
 
@@ -58,12 +59,14 @@ AuthRoute.post("/register", async (req, res, next) => {
     //checks if there is an user by the email
     result = await UserModel.findOne({ email: email });
     if (result)
-      return res.send(ReturnMessage(true, "User already exists by this email"));
+      return res.send(
+        ReturnMessage(true, "User already exists by this email", null)
+      );
     //checks if there is an user by the phone number
     result = await UserModel.findOne({ phone: phone });
     if (result)
       return res.send(
-        ReturnMessage(true, "User already exists by this phone number")
+        ReturnMessage(true, "User already exists by this phone number", null)
       );
 
     //hashes the password and save user to db
@@ -78,39 +81,98 @@ AuthRoute.post("/register", async (req, res, next) => {
     finalResPonse.token = token;
     res.send(finalResPonse);
   } catch (error) {
-    res.send(ReturnMessage(true, "Some Error happened, try again later"));
+    res.send(ReturnMessage(true, "Some Error happened, try again later", null));
   }
 });
+AuthRoute.put(
+  "/update_password",
+  JwtVerify,
+  AuthorizeUser,
+  async (req, res) => {
+    let passwordCheck, result, token, finalResPonse;
+    let { oldPassword, newPassword } = req.body;
+    try {
+      //checks if there is an user by the email
+      passwordCheck = await BcryptComparer(req.user.password, oldPassword);
+      //checks if the passwords matches
+      if (!passwordCheck)
+        return res.send(
+          ReturnMessage(true, "Your Old password is false", null)
+        );
+
+      //hashes the new password and updates in db
+      let newHashedPassword = await BcryptHasher(newPassword);
+      result = await UserModel.findByIdAndUpdate(
+        { _id: req.user._id },
+        {
+          password: newHashedPassword,
+        },
+        { new: true }
+      );
+
+      //if Update successful sends the new user with token
+      token = SignJwtFunction({ key: req.user.phone, pass: newHashedPassword });
+      finalResPonse = ReturnMessage(
+        false,
+        "Successfully password updated",
+        result
+      );
+      finalResPonse.token = token;
+      return res.send(finalResPonse);
+    } catch (error) {
+      res.send(ReturnMessage(true, error.message, null));
+    }
+  }
+);
 //check if email and password matches and continues while injecting user info in request
 async function AuthorizeUser(req, res, next) {
-  let { key, pass } = req.decoded;
-  let query = {};
-  if (key.includes("@")) query = { email: key };
-  else query = { phone: key };
+  try {
+    let { key, pass } = req.decoded;
+    key = key.toString();
 
-  let result = await UserModel.findOne(query);
-  if (!result)
-    return res.status(404).send(ReturnMessage(true, "User not Found"));
-  if (result.password != pass)
-    return res.status(404).send(ReturnMessage(true, "Password not matched"));
-  req.user = result;
-  next();
+    let query = {};
+    if (key.includes("@")) query = { email: key };
+    else query = { phone: key };
+
+    let result = await UserModel.findOne(query);
+    if (!result)
+      return res.status(404).send(ReturnMessage(true, "User not Found", null));
+    if (result.password != pass)
+      return res
+        .status(404)
+        .send(ReturnMessage(true, "Password not matched", null));
+    req.user = result;
+    next();
+  } catch (error) {
+    return res.status(404).send(ReturnMessage(true, error.message, null));
+  }
+}
+async function isAdmin(req, res, next) {
+  let user = req.user;
+  if (user.role == "admin") return next();
+  return res
+    .status(401)
+    .send(ReturnMessage(true, "401 Unauthorized Access", null));
 }
 function JwtVerify(req, res, next) {
   let token = req.headers.authorization;
   if (!token) {
-    return res.status(404).send({ error: true, message: "No Token" });
+    return res
+      .status(404)
+      .send({ error: true, message: "No Token", result: null });
   }
 
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (error, decoded) => {
     if (error) {
-      return res.status(404).send({ error: true, message: "False Token" });
+      return res
+        .status(404)
+        .send({ error: true, message: "False Token", result: null });
     }
     req.decoded = decoded;
     next();
   });
 }
-module.exports = { AuthRoute, AuthorizeUser, JwtVerify };
+module.exports = { AuthRoute, AuthorizeUser, isAdmin, JwtVerify };
 function newUserGenerator(name, email, password, phone) {
   return {
     name: name,

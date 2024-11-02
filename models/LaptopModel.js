@@ -4,7 +4,7 @@ const laptopSchema = new mongoose.Schema({
   laptop: {
     brand: { type: String, required: true },
     model: { type: String, required: true },
-    price: { type: String, required: true },
+    price: { type: Number, required: true },
     stock: { type: Number, required: true, default: 10 },
   },
   processor: {
