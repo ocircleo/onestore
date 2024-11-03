@@ -147,6 +147,25 @@ async function AuthorizeUser(req, res, next) {
     return res.status(404).send(ReturnMessage(true, error.message, null));
   }
 }
+async function AuthenticateUser(req, res, next) {
+  try {
+    let { key } = req.decoded;
+    key = key.toString();
+
+    let query = {};
+    if (key.includes("@")) query = { email: key };
+    else query = { phone: key };
+
+    let result = await UserModel.findOne(query);
+    if (!result)
+      return res.status(404).send(ReturnMessage(true, "User not Found", null));
+    req.user = result;
+    next();
+
+  } catch (error) {
+    return res.status(404).send(ReturnMessage(true, error.message, null));
+  }
+}
 async function isAdmin(req, res, next) {
   let user = req.user;
   if (user.role == "admin") return next();

@@ -1,6 +1,7 @@
 const express = require("express");
 const LaptopModel = require("../models/LaptopModel");
 const { ReturnMessage, GenerateDataUrl, textWash } = require("../utilities");
+const UserModel = require("../models/UserModel");
 const AdminRoute = express.Router();
 
 AdminRoute.post("/add_product", async (req, res) => {
@@ -52,6 +53,81 @@ AdminRoute.delete("/delete_product", async (req, res) => {
 });
 AdminRoute.get("/orders", (req, res) => {
   res.send("Welcome to the root of the application");
+});
+AdminRoute.get("/user/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const result = await UserModel.findById(id).select({
+      name: 1,
+      email: 1,
+      phone: 1,
+      role: 1,
+      city: 1,
+      address: 1,
+      disabled:1,
+    });
+    if (result) return res.send(ReturnMessage(false, "User found", result));
+    res.send(ReturnMessage(true, "User not found found", null));
+  } catch (error) {
+    res.send(ReturnMessage(true, error.message, null));
+  }
+});
+AdminRoute.put("/make_admin", async (req, res) => {
+  try{
+  const id = req.body.id;
+  const user = await UserModel.findById(id)
+  if(user.disabled) return res.send(ReturnMessage(true,"Cant make disabled users admin, Please enable the user first",null));
+  const result = await UserModel.findByIdAndUpdate(id,{role:"admin"},{new:true});
+
+  if(result) return res.send(ReturnMessage(false,"User added to Admin access",result));
+  res.send(ReturnMessage(true,"Sorry some error happened while performing action",null))
+
+}catch(error){
+  res.send(ReturnMessage(true,error.message,null))
+  }
+});
+AdminRoute.put("/remove_admin", async (req, res) => {
+  try{
+  const id = req.body.id;
+
+  const totalAdmins = await UserModel.find({ role: "admin" }).countDocuments();
+  if(totalAdmins < 2) return res.send(ReturnMessage(true,"You are the last admin, So you cant be removed",null));
+  const result = await UserModel.findByIdAndUpdate(id,{role:"user"},{new:true});
+
+  if(result) return res.send(ReturnMessage(false,"Removed from Admin access",result));
+  res.send(ReturnMessage(true,"Sorry some error happened while performing action",null))
+
+}catch(error){
+  res.send(ReturnMessage(true,error.message,null))
+  }
+});
+AdminRoute.put("/disable_user", async (req, res) => {
+  try{
+  const id = req.body.id;
+
+  const user = await UserModel.findById(id);
+  if(user.role == "admin") return res.send(ReturnMessage(true,"You cant disable admin, Remove from admin access first",null));
+  if(req.user._id == id) return res.send(ReturnMessage(true,"You cant disable Yourself",null));
+
+  const result = await UserModel.findByIdAndUpdate(id,{disabled:true},{new:true});
+  if(result) return res.send(ReturnMessage(false,"Disabled the user",result));
+  res.send(ReturnMessage(true,"Sorry some error happened while performing action",null))
+
+}catch(error){
+  res.send(ReturnMessage(true,error.message,null))
+  }
+});
+AdminRoute.put("/enable_user", async (req, res) => {
+  try{
+  const id = req.body.id;
+
+  const result = await UserModel.findByIdAndUpdate(id,{disabled:false},{new:true});
+  if(result) return res.send(ReturnMessage(false,"Enabled the user ", result));
+  res.send(ReturnMessage(true,"Sorry some error happened while performing action",null))
+
+}catch(error){
+  res.send(ReturnMessage(true,error.message,null))
+  }
 });
 AdminRoute.get("/order/:id", (req, res) => {
   res.send("Welcome to the root of the application");

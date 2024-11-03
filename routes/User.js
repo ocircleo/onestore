@@ -33,7 +33,7 @@ UserRoute.get("/search_users_admin", async (req, res) => {
     if (queryType) query.email = { $regex: expression };
     else query.phone = { $regex: expression };
     if (city != "all") query.city = { $regex: cityExpression };
-    result = await UserModel.find(query).skip(Number(skip)).limit(12);
+    result = await UserModel.find(query).select({name:1,email:1,phone:1,role:1,city:1,address:1}).skip(Number(skip)).limit(12);
     const count = await UserModel.find(query).countDocuments();
     res.send(
       ReturnMessage(false, "Found Data", { length: count, data: result })

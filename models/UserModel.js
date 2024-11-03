@@ -45,7 +45,8 @@ const schema = new mongoose.Schema({
   verified: Boolean,
   paymentHistory: Array,
   orderHistory: Array,
-  otp:Number,
+  otp: Number,
+  disabled: { type: Boolean, default: false },
 });
 
 const UserModel = mongoose.model("users", schema);
