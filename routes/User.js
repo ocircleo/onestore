@@ -18,6 +18,27 @@ UserRoute.get("/product-length", async (req, res) => {
   const length = await LaptopModel.find().countDocuments();
   res.send(ReturnMessage(false, "data found", length));
 });
+UserRoute.get("/laptops", async (req, res) => {
+  try {
+    let { text = "", page = 0 } = req.query;
+    text = textWashRegex(text).trim();
+    page = page;
+    let skip = page * 12;
+    let expression;
+    if (text.length > 0) expression = new RegExp(text, "i");
+    let result;
+    let query = {};
+    if (text.length > 0) query["laptop.model"] = { $regex: expression };
+    result = await LaptopModel.find(query).skip(Number(skip)).limit(12);
+    const count = await LaptopModel.find(query).countDocuments();
+    res.send(
+      ReturnMessage(false, "Found Data", { length: count, data: result })
+    );
+  } catch (error) {
+    console.log(error.message);
+    res.send(ReturnMessage(true, error.message, { length: 0, data: [] }));
+  }
+});
 UserRoute.get("/search_users_admin", async (req, res) => {
   try {
     let { text = "", page = 0, city = "all" } = req.query;
@@ -33,7 +54,10 @@ UserRoute.get("/search_users_admin", async (req, res) => {
     if (queryType) query.email = { $regex: expression };
     else query.phone = { $regex: expression };
     if (city != "all") query.city = { $regex: cityExpression };
-    result = await UserModel.find(query).select({name:1,email:1,phone:1,role:1,city:1,address:1}).skip(Number(skip)).limit(12);
+    result = await UserModel.find(query)
+      .select({ name: 1, email: 1, phone: 1, role: 1, city: 1, address: 1 })
+      .skip(Number(skip))
+      .limit(12);
     const count = await UserModel.find(query).countDocuments();
     res.send(
       ReturnMessage(false, "Found Data", { length: count, data: result })
@@ -84,7 +108,6 @@ UserRoute.get("/laptop_id/:id", async (req, res) => {
   try {
     const id = textWash(req.params.id);
     const result = await LaptopModel.findById(id);
-    console.log(result);
     res.send(ReturnMessage(false, "found the laptop", result));
   } catch (error) {
     res.send(ReturnMessage(true, error, {}));

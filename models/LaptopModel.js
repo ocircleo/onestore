@@ -79,6 +79,7 @@ const laptopSchema = new mongoose.Schema({
   },
   warranty: { type: String, required: true },
   publishDate: { type: Date, default: Date.now },
+  images: { type: Array, default: [] },
 });
 
 const LaptopModel = mongoose.model("laptops", laptopSchema);

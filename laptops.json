@@ -1,0 +1,998 @@
+[
+  {
+    "laptop": { "brand": "Dell", "model": "XPS 13", "price": 1200, "stock": 0 },
+    "processor": {
+      "brand": "Intel",
+      "model": "i7-1165G7",
+      "core": "Quad-Core"
+    },
+    "display": {
+      "size": "13.3 inches",
+      "type": "LED",
+      "resolution": "1920x1080",
+      "touchScreen": false,
+      "features": "Anti-glare"
+    },
+    "memory": {
+      "ram": "16GB",
+      "ramType": "DDR4",
+      "removable": "Non-Removable"
+    },
+    "storage": { "type": "SSD", "capacity": "512GB", "upgradeOptions": "Yes" },
+    "graphics": { "model": "Intel Iris Xe", "memory": "Integrated" },
+    "keyboardAndTouchpad": {
+      "keyboard": { "type": "Backlit", "features": "RGB Lighting" },
+      "touchpad": "Precision"
+    },
+    "cameraAndAudio": {
+      "webcam": "720p",
+      "speaker": "Stereo",
+      "microphone": "Array",
+      "audioFeatures": "Waves MaxxAudio"
+    },
+    "portsAndSlots": {
+      "cardReader": "No",
+      "hdmiPort": "No",
+      "usbTypeC": "2",
+      "headphoneJack": "Yes"
+    },
+    "networkAndConnectivity": { "wifi": "WiFi 6", "bluetooth": "5.1" },
+    "security": { "fingerprintSensor": "Yes" },
+    "power": {
+      "batteryType": "Li-ion",
+      "batteryCapacity": "52Wh",
+      "adapterType": "65W"
+    },
+    "physicalSpecification": {
+      "dimensions": {
+        "height": "0.58 inches",
+        "width": "11.6 inches",
+        "depth": "7.8 inches"
+      },
+      "color": "Silver",
+      "weight": "1.5 kg"
+    },
+    "images": [],
+    "_id": "6718d2ab5c74e064b2067d16",
+    "operatingSystem": "Windows 10 Pro",
+    "warranty": "6 Years",
+    "publishDate": "2024-10-21T13:39:09.279Z",
+    "dataUrl": "Dell-XPS-13"
+  },
+  {
+    "laptop": {
+      "brand": "Apple",
+      "model": "MacBook Pro 16",
+      "price": 2500,
+      "stock": 8
+    },
+    "processor": { "brand": "Apple", "model": "M1 Max", "core": "10-core" },
+    "display": {
+      "size": "16 inches",
+      "type": "Retina",
+      "resolution": "3456x2234",
+      "touchScreen": false,
+      "features": "True Tone"
+    },
+    "memory": {
+      "ram": "32GB",
+      "ramType": "Unified Memory",
+      "removable": "Non-Removable"
+    },
+    "storage": { "type": "SSD", "capacity": "1TB", "upgradeOptions": "No" },
+    "graphics": { "model": "Apple M1 Max", "memory": "Integrated" },
+    "keyboardAndTouchpad": {
+      "keyboard": { "type": "Magic Keyboard", "features": "Backlit" },
+      "touchpad": "Force Touch"
+    },
+    "cameraAndAudio": {
+      "webcam": "1080p",
+      "speaker": "Six-Speaker System",
+      "microphone": "Three-Mic Array",
+      "audioFeatures": "Spatial Audio"
+    },
+    "portsAndSlots": {
+      "cardReader": "SDXC",
+      "hdmiPort": "Yes",
+      "usbTypeC": "3",
+      "headphoneJack": "Yes"
+    },
+    "networkAndConnectivity": { "wifi": "WiFi 6", "bluetooth": "5.0" },
+    "security": { "fingerprintSensor": "Yes" },
+    "power": {
+      "batteryType": "Li-polymer",
+      "batteryCapacity": "100Wh",
+      "adapterType": "140W USB-C"
+    },
+    "physicalSpecification": {
+      "dimensions": {
+        "height": "0.66 inches",
+        "width": "14.09 inches",
+        "depth": "9.68 inches"
+      },
+      "color": "Space Gray",
+      "weight": "2.1 kg"
+    },
+    "images": [],
+    "_id": "6718d2ab5c74e064b2067d17",
+    "operatingSystem": "macOS Monterey",
+    "warranty": "1 Year",
+    "publishDate": "2024-10-21T13:39:09.279Z",
+    "dataUrl": "Apple-MacBook-Pro-16"
+  },
+  {
+    "laptop": {
+      "brand": "HP",
+      "model": "Spectre x360",
+      "price": 1400,
+      "stock": 20
+    },
+    "processor": {
+      "brand": "Intel",
+      "model": "i7-1165G7",
+      "core": "Quad-Core"
+    },
+    "display": {
+      "size": "13.5 inches",
+      "type": "OLED",
+      "resolution": "3000x2000",
+      "touchScreen": true,
+      "features": "Corning Gorilla Glass"
+    },
+    "memory": {
+      "ram": "16GB",
+      "ramType": "LPDDR4x",
+      "removable": "Non-Removable"
+    },
+    "storage": { "type": "SSD", "capacity": "512GB", "upgradeOptions": "Yes" },
+    "graphics": { "model": "Intel Iris Xe", "memory": "Integrated" },
+    "keyboardAndTouchpad": {
+      "keyboard": { "type": "Backlit", "features": "Full-size" },
+      "touchpad": "Precision"
+    },
+    "cameraAndAudio": {
+      "webcam": "1080p",
+      "speaker": "Bang & Olufsen",
+      "microphone": "Dual Array",
+      "audioFeatures": "HP Audio Boost"
+    },
+    "portsAndSlots": {
+      "cardReader": "MicroSD",
+      "hdmiPort": "No",
+      "usbTypeC": "2",
+      "headphoneJack": "Yes"
+    },
+    "networkAndConnectivity": { "wifi": "WiFi 6", "bluetooth": "5.1" },
+    "security": { "fingerprintSensor": "Yes" },
+    "power": {
+      "batteryType": "Li-ion",
+      "batteryCapacity": "66Wh",
+      "adapterType": "65W"
+    },
+    "physicalSpecification": {
+      "dimensions": {
+        "height": "0.67 inches",
+        "width": "11.75 inches",
+        "depth": "8.58 inches"
+      },
+      "color": "Nightfall Black",
+      "weight": "1.32 kg"
+    },
+    "images": [],
+    "_id": "6718d2ab5c74e064b2067d18",
+    "operatingSystem": "Windows 11 Home",
+    "warranty": "2 Years",
+    "publishDate": "2024-10-21T13:39:09.279Z",
+    "dataUrl": "HP-Spectre-x360"
+  },
+  {
+    "laptop": {
+      "brand": "Lenovo",
+      "model": "ThinkPad X1 Carbon",
+      "price": 1800,
+      "stock": 12
+    },
+    "processor": { "brand": "Intel", "model": "i7-1260P", "core": "12-core" },
+    "display": {
+      "size": "14 inches",
+      "type": "IPS",
+      "resolution": "1920x1200",
+      "touchScreen": false,
+      "features": "Anti-glare"
+    },
+    "memory": {
+      "ram": "16GB",
+      "ramType": "LPDDR5",
+      "removable": "Non-Removable"
+    },
+    "storage": { "type": "SSD", "capacity": "1TB", "upgradeOptions": "Yes" },
+    "graphics": { "model": "Intel Iris Xe", "memory": "Integrated" },
+    "keyboardAndTouchpad": {
+      "keyboard": { "type": "Backlit", "features": "Spill-Resistant" },
+      "touchpad": "Precision"
+    },
+    "cameraAndAudio": {
+      "webcam": "1080p",
+      "speaker": "Dolby Atmos",
+      "microphone": "Dual Array",
+      "audioFeatures": "Dolby Voice"
+    },
+    "portsAndSlots": {
+      "cardReader": "No",
+      "hdmiPort": "Yes",
+      "usbTypeC": "2",
+      "headphoneJack": "Yes"
+    },
+    "networkAndConnectivity": { "wifi": "WiFi 6E", "bluetooth": "5.2" },
+    "security": { "fingerprintSensor": "Yes" },
+    "power": {
+      "batteryType": "Li-polymer",
+      "batteryCapacity": "57Wh",
+      "adapterType": "65W"
+    },
+    "physicalSpecification": {
+      "dimensions": {
+        "height": "0.59 inches",
+        "width": "12.38 inches",
+        "depth": "8.54 inches"
+      },
+      "color": "Black",
+      "weight": "1.13 kg"
+    },
+    "images": [],
+    "_id": "6718d2ab5c74e064b2067d19",
+    "operatingSystem": "Windows 11 Pro",
+    "warranty": "4 Years",
+    "publishDate": "2024-10-21T13:39:09.279Z",
+    "dataUrl": "Lenovo-ThinkPad-X1-Carbon"
+  },
+  {
+    "laptop": {
+      "brand": "Asus",
+      "model": "ROG Zephyrus G14",
+      "price": 2000,
+      "stock": 10
+    },
+    "processor": {
+      "brand": "AMD",
+      "model": "Ryzen 9 5900HS",
+      "core": "8-core"
+    },
+    "display": {
+      "size": "14 inches",
+      "type": "IPS",
+      "resolution": "2560x1440",
+      "touchScreen": false,
+      "features": "Pantone Validated"
+    },
+    "memory": {
+      "ram": "16GB",
+      "ramType": "DDR4",
+      "removable": "Non-Removable"
+    },
+    "storage": { "type": "SSD", "capacity": "1TB", "upgradeOptions": "Yes" },
+    "graphics": { "model": "NVIDIA RTX 3060", "memory": "6GB GDDR6" },
+    "keyboardAndTouchpad": {
+      "keyboard": { "type": "Backlit", "features": "RGB Lighting" },
+      "touchpad": "Precision"
+    },
+    "cameraAndAudio": {
+      "webcam": "No",
+      "speaker": "Dolby Atmos",
+      "microphone": "Dual Array",
+      "audioFeatures": "AI Noise Cancellation"
+    },
+    "portsAndSlots": {
+      "cardReader": "No",
+      "hdmiPort": "Yes",
+      "usbTypeC": "2",
+      "headphoneJack": "Yes"
+    },
+    "networkAndConnectivity": { "wifi": "WiFi 6", "bluetooth": "5.1" },
+    "security": { "fingerprintSensor": "Yes" },
+    "power": {
+      "batteryType": "Li-ion",
+      "batteryCapacity": "76Wh",
+      "adapterType": "180W"
+    },
+    "physicalSpecification": {
+      "dimensions": {
+        "height": "0.70 inches",
+        "width": "12.76 inches",
+        "depth": "8.74 inches"
+      },
+      "color": "Eclipse Gray",
+      "weight": "1.7 kg"
+    },
+    "images": [],
+    "_id": "6718d2ab5c74e064b2067d1a",
+    "operatingSystem": "Windows 11 Home",
+    "warranty": "1 Year",
+    "publishDate": "2024-10-21T13:39:09.279Z",
+    "dataUrl": "Asus-ROG-Zephyrus-G14"
+  },
+  {
+    "laptop": {
+      "brand": "Dell",
+      "model": "XPS 13",
+      "price": 1200,
+      "stock": 15
+    },
+    "processor": {
+      "brand": "Intel",
+      "model": "i7-1165G7",
+      "core": "Quad-Core"
+    },
+    "display": {
+      "size": "13.3 inches",
+      "type": "LED",
+      "resolution": "1920x1080",
+      "touchScreen": false,
+      "features": "Anti-glare"
+    },
+    "memory": {
+      "ram": "16GB",
+      "ramType": "DDR4",
+      "removable": "Non-Removable"
+    },
+    "storage": { "type": "SSD", "capacity": "512GB", "upgradeOptions": "Yes" },
+    "graphics": { "model": "Intel Iris Xe", "memory": "Integrated" },
+    "keyboardAndTouchpad": {
+      "keyboard": { "type": "Backlit", "features": "RGB Lighting" },
+      "touchpad": "Precision"
+    },
+    "cameraAndAudio": {
+      "webcam": "720p",
+      "speaker": "Stereo",
+      "microphone": "Array",
+      "audioFeatures": "Waves MaxxAudio"
+    },
+    "portsAndSlots": {
+      "cardReader": "No",
+      "hdmiPort": "No",
+      "usbTypeC": "2",
+      "headphoneJack": "Yes"
+    },
+    "networkAndConnectivity": { "wifi": "WiFi 6", "bluetooth": "5.1" },
+    "security": { "fingerprintSensor": "Yes" },
+    "power": {
+      "batteryType": "Li-ion",
+      "batteryCapacity": "52Wh",
+      "adapterType": "65W"
+    },
+    "physicalSpecification": {
+      "dimensions": {
+        "height": "0.58 inches",
+        "width": "11.6 inches",
+        "depth": "7.8 inches"
+      },
+      "color": "Silver",
+      "weight": "1.2 kg"
+    },
+    "images": [],
+    "_id": "6718d2ab5c74e064b2067d1b",
+    "operatingSystem": "Windows 10 Pro",
+    "warranty": "2 Years",
+    "publishDate": "2024-10-21T13:39:09.279Z",
+    "dataUrl": "Dell-XPS-13"
+  },
+  {
+    "laptop": {
+      "brand": "Apple",
+      "model": "MacBook Pro 16",
+      "price": 2500,
+      "stock": 8
+    },
+    "processor": { "brand": "Apple", "model": "M1 Max", "core": "10-core" },
+    "display": {
+      "size": "16 inches",
+      "type": "Retina",
+      "resolution": "3456x2234",
+      "touchScreen": false,
+      "features": "True Tone"
+    },
+    "memory": {
+      "ram": "32GB",
+      "ramType": "Unified Memory",
+      "removable": "Non-Removable"
+    },
+    "storage": { "type": "SSD", "capacity": "1TB", "upgradeOptions": "No" },
+    "graphics": { "model": "Apple M1 Max", "memory": "Integrated" },
+    "keyboardAndTouchpad": {
+      "keyboard": { "type": "Magic Keyboard", "features": "Backlit" },
+      "touchpad": "Force Touch"
+    },
+    "cameraAndAudio": {
+      "webcam": "1080p",
+      "speaker": "Six-Speaker System",
+      "microphone": "Three-Mic Array",
+      "audioFeatures": "Spatial Audio"
+    },
+    "portsAndSlots": {
+      "cardReader": "SDXC",
+      "hdmiPort": "Yes",
+      "usbTypeC": "3",
+      "headphoneJack": "Yes"
+    },
+    "networkAndConnectivity": { "wifi": "WiFi 6", "bluetooth": "5.0" },
+    "security": { "fingerprintSensor": "Yes" },
+    "power": {
+      "batteryType": "Li-polymer",
+      "batteryCapacity": "100Wh",
+      "adapterType": "140W USB-C"
+    },
+    "physicalSpecification": {
+      "dimensions": {
+        "height": "0.66 inches",
+        "width": "14.09 inches",
+        "depth": "9.68 inches"
+      },
+      "color": "Space Gray",
+      "weight": "2.1 kg"
+    },
+    "images": [],
+    "_id": "6718d2ab5c74e064b2067d1c",
+    "operatingSystem": "macOS Monterey",
+    "warranty": "1 Year",
+    "publishDate": "2024-10-21T13:39:09.279Z",
+    "dataUrl": "Apple-MacBook-Pro-16"
+  },
+  {
+    "laptop": {
+      "brand": "HP",
+      "model": "Spectre x360",
+      "price": 1400,
+      "stock": 20
+    },
+    "processor": {
+      "brand": "Intel",
+      "model": "i7-1165G7",
+      "core": "Quad-Core"
+    },
+    "display": {
+      "size": "13.5 inches",
+      "type": "OLED",
+      "resolution": "3000x2000",
+      "touchScreen": true,
+      "features": "Corning Gorilla Glass"
+    },
+    "memory": {
+      "ram": "16GB",
+      "ramType": "LPDDR4x",
+      "removable": "Non-Removable"
+    },
+    "storage": { "type": "SSD", "capacity": "512GB", "upgradeOptions": "Yes" },
+    "graphics": { "model": "Intel Iris Xe", "memory": "Integrated" },
+    "keyboardAndTouchpad": {
+      "keyboard": { "type": "Backlit", "features": "Full-size" },
+      "touchpad": "Precision"
+    },
+    "cameraAndAudio": {
+      "webcam": "1080p",
+      "speaker": "Bang & Olufsen",
+      "microphone": "Dual Array",
+      "audioFeatures": "HP Audio Boost"
+    },
+    "portsAndSlots": {
+      "cardReader": "MicroSD",
+      "hdmiPort": "No",
+      "usbTypeC": "2",
+      "headphoneJack": "Yes"
+    },
+    "networkAndConnectivity": { "wifi": "WiFi 6", "bluetooth": "5.1" },
+    "security": { "fingerprintSensor": "Yes" },
+    "power": {
+      "batteryType": "Li-ion",
+      "batteryCapacity": "66Wh",
+      "adapterType": "65W"
+    },
+    "physicalSpecification": {
+      "dimensions": {
+        "height": "0.67 inches",
+        "width": "11.75 inches",
+        "depth": "8.58 inches"
+      },
+      "color": "Nightfall Black",
+      "weight": "1.32 kg"
+    },
+    "images": [],
+    "_id": "6718d2ab5c74e064b2067d1d",
+    "operatingSystem": "Windows 11 Home",
+    "warranty": "2 Years",
+    "publishDate": "2024-10-21T13:39:09.279Z",
+    "dataUrl": "HP-Spectre-x360"
+  },
+  {
+    "laptop": {
+      "brand": "Lenovo",
+      "model": "ThinkPad X1 Carbon",
+      "price": 1800,
+      "stock": 12
+    },
+    "processor": { "brand": "Intel", "model": "i7-1260P", "core": "12-core" },
+    "display": {
+      "size": "14 inches",
+      "type": "IPS",
+      "resolution": "1920x1200",
+      "touchScreen": false,
+      "features": "Anti-glare"
+    },
+    "memory": {
+      "ram": "16GB",
+      "ramType": "LPDDR5",
+      "removable": "Non-Removable"
+    },
+    "storage": { "type": "SSD", "capacity": "1TB", "upgradeOptions": "Yes" },
+    "graphics": { "model": "Intel Iris Xe", "memory": "Integrated" },
+    "keyboardAndTouchpad": {
+      "keyboard": { "type": "Backlit", "features": "Spill-Resistant" },
+      "touchpad": "Precision"
+    },
+    "cameraAndAudio": {
+      "webcam": "1080p",
+      "speaker": "Dolby Atmos",
+      "microphone": "Dual Array",
+      "audioFeatures": "Dolby Voice"
+    },
+    "portsAndSlots": {
+      "cardReader": "No",
+      "hdmiPort": "Yes",
+      "usbTypeC": "2",
+      "headphoneJack": "Yes"
+    },
+    "networkAndConnectivity": { "wifi": "WiFi 6E", "bluetooth": "5.2" },
+    "security": { "fingerprintSensor": "Yes" },
+    "power": {
+      "batteryType": "Li-polymer",
+      "batteryCapacity": "57Wh",
+      "adapterType": "65W"
+    },
+    "physicalSpecification": {
+      "dimensions": {
+        "height": "0.59 inches",
+        "width": "12.38 inches",
+        "depth": "8.54 inches"
+      },
+      "color": "Black",
+      "weight": "1.13 kg"
+    },
+    "images": [],
+    "_id": "6718d2ab5c74e064b2067d1e",
+    "operatingSystem": "Windows 11 Pro",
+    "warranty": "3 Years",
+    "publishDate": "2024-10-21T13:39:09.279Z",
+    "dataUrl": "Lenovo-ThinkPad-X1-Carbon"
+  },
+  {
+    "laptop": {
+      "brand": "Asus",
+      "model": "ROG Zephyrus G14",
+      "price": 2000,
+      "stock": 10
+    },
+    "processor": {
+      "brand": "AMD",
+      "model": "Ryzen 9 5900HS",
+      "core": "8-core"
+    },
+    "display": {
+      "size": "14 inches",
+      "type": "IPS",
+      "resolution": "2560x1440",
+      "touchScreen": false,
+      "features": "Pantone Validated"
+    },
+    "memory": {
+      "ram": "16GB",
+      "ramType": "DDR4",
+      "removable": "Non-Removable"
+    },
+    "storage": { "type": "SSD", "capacity": "1TB", "upgradeOptions": "Yes" },
+    "graphics": { "model": "NVIDIA RTX 3060", "memory": "6GB GDDR6" },
+    "keyboardAndTouchpad": {
+      "keyboard": { "type": "Backlit", "features": "RGB Lighting" },
+      "touchpad": "Precision"
+    },
+    "cameraAndAudio": {
+      "webcam": "No",
+      "speaker": "Dolby Atmos",
+      "microphone": "Dual Array",
+      "audioFeatures": "AI Noise Cancellation"
+    },
+    "portsAndSlots": {
+      "cardReader": "No",
+      "hdmiPort": "Yes",
+      "usbTypeC": "2",
+      "headphoneJack": "Yes"
+    },
+    "networkAndConnectivity": { "wifi": "WiFi 6", "bluetooth": "5.1" },
+    "security": { "fingerprintSensor": "Yes" },
+    "power": {
+      "batteryType": "Li-ion",
+      "batteryCapacity": "76Wh",
+      "adapterType": "180W"
+    },
+    "physicalSpecification": {
+      "dimensions": {
+        "height": "0.70 inches",
+        "width": "12.76 inches",
+        "depth": "8.74 inches"
+      },
+      "color": "Eclipse Gray",
+      "weight": "1.7 kg"
+    },
+    "images": [],
+    "_id": "6718d2ab5c74e064b2067d1f",
+    "operatingSystem": "Windows 11 Home",
+    "warranty": "1 Year",
+    "publishDate": "2024-10-21T13:39:09.279Z",
+    "dataUrl": "Asus-ROG-Zephyrus-G14"
+  },
+  {
+    "laptop": {
+      "brand": "Dell",
+      "model": "XPS 13",
+      "price": 1200,
+      "stock": 15
+    },
+    "processor": {
+      "brand": "Intel",
+      "model": "i7-1165G7",
+      "core": "Quad-Core"
+    },
+    "display": {
+      "size": "13.3 inches",
+      "type": "LED",
+      "resolution": "1920x1080",
+      "touchScreen": false,
+      "features": "Anti-glare"
+    },
+    "memory": {
+      "ram": "16GB",
+      "ramType": "DDR4",
+      "removable": "Non-Removable"
+    },
+    "storage": { "type": "SSD", "capacity": "512GB", "upgradeOptions": "Yes" },
+    "graphics": { "model": "Intel Iris Xe", "memory": "Integrated" },
+    "keyboardAndTouchpad": {
+      "keyboard": { "type": "Backlit", "features": "RGB Lighting" },
+      "touchpad": "Precision"
+    },
+    "cameraAndAudio": {
+      "webcam": "720p",
+      "speaker": "Stereo",
+      "microphone": "Array",
+      "audioFeatures": "Waves MaxxAudio"
+    },
+    "portsAndSlots": {
+      "cardReader": "No",
+      "hdmiPort": "No",
+      "usbTypeC": "2",
+      "headphoneJack": "Yes"
+    },
+    "networkAndConnectivity": { "wifi": "WiFi 6", "bluetooth": "5.1" },
+    "security": { "fingerprintSensor": "Yes" },
+    "power": {
+      "batteryType": "Li-ion",
+      "batteryCapacity": "52Wh",
+      "adapterType": "65W"
+    },
+    "physicalSpecification": {
+      "dimensions": {
+        "height": "0.58 inches",
+        "width": "11.6 inches",
+        "depth": "7.8 inches"
+      },
+      "color": "Silver",
+      "weight": "1.2 kg"
+    },
+    "images": [],
+    "_id": "6718d2ab5c74e064b2067d20",
+    "operatingSystem": "Windows 10 Pro",
+    "warranty": "2 Years",
+    "publishDate": "2024-10-21T13:39:09.279Z",
+    "dataUrl": "Dell-XPS-13"
+  },
+  {
+    "laptop": {
+      "brand": "Apple",
+      "model": "MacBook Pro 16",
+      "price": 2500,
+      "stock": 8
+    },
+    "processor": { "brand": "Apple", "model": "M1 Max", "core": "10-core" },
+    "display": {
+      "size": "16 inches",
+      "type": "Retina",
+      "resolution": "3456x2234",
+      "touchScreen": false,
+      "features": "True Tone"
+    },
+    "memory": {
+      "ram": "32GB",
+      "ramType": "Unified Memory",
+      "removable": "Non-Removable"
+    },
+    "storage": { "type": "SSD", "capacity": "1TB", "upgradeOptions": "No" },
+    "graphics": { "model": "Apple M1 Max", "memory": "Integrated" },
+    "keyboardAndTouchpad": {
+      "keyboard": { "type": "Magic Keyboard", "features": "Backlit" },
+      "touchpad": "Force Touch"
+    },
+    "cameraAndAudio": {
+      "webcam": "1080p",
+      "speaker": "Six-Speaker System",
+      "microphone": "Three-Mic Array",
+      "audioFeatures": "Spatial Audio"
+    },
+    "portsAndSlots": {
+      "cardReader": "SDXC",
+      "hdmiPort": "Yes",
+      "usbTypeC": "3",
+      "headphoneJack": "Yes"
+    },
+    "networkAndConnectivity": { "wifi": "WiFi 6", "bluetooth": "5.0" },
+    "security": { "fingerprintSensor": "Yes" },
+    "power": {
+      "batteryType": "Li-polymer",
+      "batteryCapacity": "100Wh",
+      "adapterType": "140W USB-C"
+    },
+    "physicalSpecification": {
+      "dimensions": {
+        "height": "0.66 inches",
+        "width": "14.09 inches",
+        "depth": "9.68 inches"
+      },
+      "color": "Space Gray",
+      "weight": "2.1 kg"
+    },
+    "images": [],
+    "_id": "6718d2ab5c74e064b2067d21",
+    "operatingSystem": "macOS Monterey",
+    "warranty": "1 Year",
+    "publishDate": "2024-10-21T13:39:09.279Z",
+    "dataUrl": "Apple-MacBook-Pro-16"
+  },
+  {
+    "laptop": {
+      "brand": "HP",
+      "model": "Spectre x360",
+      "price": 1400,
+      "stock": 20
+    },
+    "processor": {
+      "brand": "Intel",
+      "model": "i7-1165G7",
+      "core": "Quad-Core"
+    },
+    "display": {
+      "size": "13.5 inches",
+      "type": "OLED",
+      "resolution": "3000x2000",
+      "touchScreen": true,
+      "features": "Corning Gorilla Glass"
+    },
+    "memory": {
+      "ram": "16GB",
+      "ramType": "LPDDR4x",
+      "removable": "Non-Removable"
+    },
+    "storage": { "type": "SSD", "capacity": "512GB", "upgradeOptions": "Yes" },
+    "graphics": { "model": "Intel Iris Xe", "memory": "Integrated" },
+    "keyboardAndTouchpad": {
+      "keyboard": { "type": "Backlit", "features": "Full-size" },
+      "touchpad": "Precision"
+    },
+    "cameraAndAudio": {
+      "webcam": "1080p",
+      "speaker": "Bang & Olufsen",
+      "microphone": "Dual Array",
+      "audioFeatures": "HP Audio Boost"
+    },
+    "portsAndSlots": {
+      "cardReader": "MicroSD",
+      "hdmiPort": "No",
+      "usbTypeC": "2",
+      "headphoneJack": "Yes"
+    },
+    "networkAndConnectivity": { "wifi": "WiFi 6", "bluetooth": "5.1" },
+    "security": { "fingerprintSensor": "Yes" },
+    "power": {
+      "batteryType": "Li-ion",
+      "batteryCapacity": "66Wh",
+      "adapterType": "65W"
+    },
+    "physicalSpecification": {
+      "dimensions": {
+        "height": "0.67 inches",
+        "width": "11.75 inches",
+        "depth": "8.58 inches"
+      },
+      "color": "Nightfall Black",
+      "weight": "1.32 kg"
+    },
+    "images": [],
+    "_id": "6718d2ab5c74e064b2067d22",
+    "operatingSystem": "Windows 11 Home",
+    "warranty": "2 Years",
+    "publishDate": "2024-10-21T13:39:09.279Z",
+    "dataUrl": "HP-Spectre-x360"
+  },
+  {
+    "laptop": {
+      "brand": "Lenovo",
+      "model": "ThinkPad X1 Carbon",
+      "price": 1800,
+      "stock": 12
+    },
+    "processor": { "brand": "Intel", "model": "i7-1260P", "core": "12-core" },
+    "display": {
+      "size": "14 inches",
+      "type": "IPS",
+      "resolution": "1920x1200",
+      "touchScreen": false,
+      "features": "Anti-glare"
+    },
+    "memory": {
+      "ram": "16GB",
+      "ramType": "LPDDR5",
+      "removable": "Non-Removable"
+    },
+    "storage": { "type": "SSD", "capacity": "1TB", "upgradeOptions": "Yes" },
+    "graphics": { "model": "Intel Iris Xe", "memory": "Integrated" },
+    "keyboardAndTouchpad": {
+      "keyboard": { "type": "Backlit", "features": "Spill-Resistant" },
+      "touchpad": "Precision"
+    },
+    "cameraAndAudio": {
+      "webcam": "1080p",
+      "speaker": "Dolby Atmos",
+      "microphone": "Dual Array",
+      "audioFeatures": "Dolby Voice"
+    },
+    "portsAndSlots": {
+      "cardReader": "No",
+      "hdmiPort": "Yes",
+      "usbTypeC": "2",
+      "headphoneJack": "Yes"
+    },
+    "networkAndConnectivity": { "wifi": "WiFi 6E", "bluetooth": "5.2" },
+    "security": { "fingerprintSensor": "Yes" },
+    "power": {
+      "batteryType": "Li-polymer",
+      "batteryCapacity": "57Wh",
+      "adapterType": "65W"
+    },
+    "physicalSpecification": {
+      "dimensions": {
+        "height": "0.59 inches",
+        "width": "12.38 inches",
+        "depth": "8.54 inches"
+      },
+      "color": "Black",
+      "weight": "1.13 kg"
+    },
+    "images": [],
+    "_id": "6718d2ab5c74e064b2067d23",
+    "operatingSystem": "Windows 11 Pro",
+    "warranty": "3 Years",
+    "publishDate": "2024-10-21T13:39:09.279Z",
+    "dataUrl": "Lenovo-ThinkPad-X1-Carbon"
+  },
+  {
+    "laptop": {
+      "brand": "Asus",
+      "model": "ROG Zephyrus G14",
+      "price": 2000,
+      "stock": 10
+    },
+    "processor": {
+      "brand": "AMD",
+      "model": "Ryzen 9 5900HS",
+      "core": "8-core"
+    },
+    "display": {
+      "size": "14 inches",
+      "type": "IPS",
+      "resolution": "2560x1440",
+      "touchScreen": false,
+      "features": "Pantone Validated"
+    },
+    "memory": {
+      "ram": "16GB",
+      "ramType": "DDR4",
+      "removable": "Non-Removable"
+    },
+    "storage": { "type": "SSD", "capacity": "1TB", "upgradeOptions": "Yes" },
+    "graphics": { "model": "NVIDIA RTX 3060", "memory": "6GB GDDR6" },
+    "keyboardAndTouchpad": {
+      "keyboard": { "type": "Backlit", "features": "RGB Lighting" },
+      "touchpad": "Precision"
+    },
+    "cameraAndAudio": {
+      "webcam": "No",
+      "speaker": "Dolby Atmos",
+      "microphone": "Dual Array",
+      "audioFeatures": "AI Noise Cancellation"
+    },
+    "portsAndSlots": {
+      "cardReader": "No",
+      "hdmiPort": "Yes",
+      "usbTypeC": "2",
+      "headphoneJack": "Yes"
+    },
+    "networkAndConnectivity": { "wifi": "WiFi 6", "bluetooth": "5.1" },
+    "security": { "fingerprintSensor": "Yes" },
+    "power": {
+      "batteryType": "Li-ion",
+      "batteryCapacity": "76Wh",
+      "adapterType": "180W"
+    },
+    "physicalSpecification": {
+      "dimensions": {
+        "height": "0.70 inches",
+        "width": "12.76 inches",
+        "depth": "8.74 inches"
+      },
+      "color": "Eclipse Gray",
+      "weight": "1.7 kg"
+    },
+    "images": [],
+    "_id": "6718d2ab5c74e064b2067d24",
+    "operatingSystem": "Windows 11 Home",
+    "warranty": "1 Year",
+    "publishDate": "2024-10-21T13:39:09.279Z",
+    "dataUrl": "Asus-ROG-Zephyrus-G14"
+  },
+  {
+    "laptop": {
+      "brand": "HP",
+      "model": "Aspiron h-123",
+      "price": 50000,
+      "stock": 10
+    },
+    "processor": { "brand": "intel", "model": "", "core": "" },
+    "display": {
+      "size": "15",
+      "type": "",
+      "resolution": "",
+      "touchScreen": false,
+      "features": ""
+    },
+    "memory": { "ram": "12", "ramType": "", "removable": "Non-Removable" },
+    "storage": { "type": "", "capacity": "512", "upgradeOptions": "" },
+    "graphics": { "model": "", "memory": "" },
+    "keyboardAndTouchpad": {
+      "keyboard": { "type": "", "features": "" },
+      "touchpad": ""
+    },
+    "cameraAndAudio": {
+      "webcam": "",
+      "speaker": "",
+      "microphone": "",
+      "audioFeatures": ""
+    },
+    "portsAndSlots": {
+      "cardReader": "",
+      "hdmiPort": "",
+      "usbTypeC": "",
+      "headphoneJack": ""
+    },
+    "networkAndConnectivity": { "wifi": "", "bluetooth": "" },
+    "security": { "fingerprintSensor": "" },
+    "power": { "batteryType": "", "batteryCapacity": "", "adapterType": "" },
+    "physicalSpecification": {
+      "dimensions": { "height": "", "width": "", "depth": "" },
+      "color": "black",
+      "weight": "12"
+    },
+    "images": [],
+    "_id": "671da8b1fab57438da976535",
+    "dataUrl": "HP-Aspiron-h-123",
+    "operatingSystem": "",
+    "warranty": "2 years warrenty",
+    "publishDate": "2024-10-27T02:42:57.234Z",
+    "__v": 0
+  }
+]
