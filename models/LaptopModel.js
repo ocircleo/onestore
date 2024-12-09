@@ -13,68 +13,35 @@ const laptopSchema = new mongoose.Schema({
     core: { type: String },
   },
   display: {
-    size: { type: String, required: true },
+    size: { type: Number, required: true },
     type: { type: String },
     resolution: { type: String },
     touchScreen: { type: Boolean },
-    features: { type: String },
   },
   memory: {
-    ram: { type: String, required: true },
+    ram: { type: Number, required: true },
     ramType: { type: String },
-    removable: {
-      type: String,
-      enum: ["Removable", "Non-Removable"],
-    },
+    description: { type: String },
   },
   storage: {
     type: { type: String },
-    capacity: { type: String, required: true },
-    upgradeOptions: { type: String }, // Configurable storage options
+    capacity: { type: Number, required: true },
+    description: { type: String },
   },
   graphics: {
-    model: { type: String },
-    memory: { type: String },
+    size: { type: Number, required: true },
+    ramType: { type: String },
+    description: { type: String },
   },
-  keyboardAndTouchpad: {
-    keyboard: {
-      type: { type: String },
-      features: { type: String },
-    },
-    touchpad: { type: String },
-  },
-  cameraAndAudio: {
-    webcam: { type: String },
-    speaker: { type: String },
-    microphone: { type: String },
-    audioFeatures: { type: String },
-  },
-  portsAndSlots: {
-    cardReader: { type: String },
-    hdmiPort: { type: String },
-    usbTypeC: { type: String },
-    headphoneJack: { type: String },
-  },
-  networkAndConnectivity: {
-    wifi: { type: String },
-    bluetooth: { type: String },
-  },
-  security: {
-    fingerprintSensor: { type: String },
-  },
-  operatingSystem: { type: String },
-  power: {
-    batteryType: { type: String },
-    batteryCapacity: { type: String },
-    adapterType: { type: String },
-  },
+  keyboard: { type: String },
+  fingerPrint: { type: Boolean },
+  portsAndSlots: { type: String },
+  networkAndConnectivity: { type: String },
+  os: { type: String },
+  battery: { type: String },
+
   physicalSpecification: {
     color: { type: String, required: true },
-    dimensions: {
-      height: { type: String },
-      width: { type: String },
-      depth: { type: String },
-    },
     weight: { type: String },
   },
   warranty: { type: String, required: true },

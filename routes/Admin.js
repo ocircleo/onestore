@@ -205,14 +205,11 @@ AdminRoute.put("/upload-image", async (req, res) => {
     let UpdateIndex = 0;
 
     let result = await LaptopModel.findById(id);
-    console.log("images: ", result.images);
+   
     if (result.images[Number(index)]) UpdateIndex = index;
     else UpdateIndex = result.images.length;
-    console.log({ index });
-    console.log({ UpdateIndex });
     const imageArr = result.images;
     imageArr[UpdateIndex] = url;
-    console.log("new array: ", imageArr);
     result = await LaptopModel.findByIdAndUpdate(
       id,
       { images: imageArr },
@@ -246,7 +243,6 @@ AdminRoute.put("/delete-image", async (req, res) => {
     if(imageArr[i] == url) continue;
     newArray.push(imageArr[i]);    
     }
-    console.log("new array: ",newArray);
     result = await LaptopModel.findByIdAndUpdate(
       id,
       { images: newArray },

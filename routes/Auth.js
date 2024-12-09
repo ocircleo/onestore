@@ -53,7 +53,6 @@ AuthRoute.put("/login", async (req, res) => {
 AuthRoute.post("/register", async (req, res, next) => {
   let hashedPassword, token, result, newUser, finalResPonse;
   let { name, email, password, phone } = req.body;
-  console.log({ name, email, password, phone });
 
   try {
     //checks if there is an user by the email

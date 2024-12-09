@@ -1,5 +1,10 @@
 const express = require("express");
-const { textWash, ReturnMessage, textWashRegex } = require("../utilities");
+const {
+  textWash,
+  ReturnMessage,
+  textWashRegex,
+  queryOrganizer,
+} = require("../utilities");
 const LaptopModel = require("../models/LaptopModel");
 const { JwtVerify, AuthorizeUser } = require("./Auth");
 const UserModel = require("../models/UserModel");
@@ -31,6 +36,64 @@ UserRoute.get("/laptops", async (req, res) => {
     if (text.length > 0) query["laptop.model"] = { $regex: expression };
     result = await LaptopModel.find(query).skip(Number(skip)).limit(12);
     const count = await LaptopModel.find(query).countDocuments();
+    res.send(
+      ReturnMessage(false, "Found Data", { length: count, data: result })
+    );
+  } catch (error) {
+    console.log(error.message);
+    res.send(ReturnMessage(true, error.message, { length: 0, data: [] }));
+  }
+});
+UserRoute.get("/search", async (req, res) => {
+  try {
+    // text -- regex, price -- number search, stock -- boolean search, sort -- sort, other -- text search;
+    let query = req.query;
+    let filteredQuery = queryOrganizer(query);
+    let dbQuery = {};
+    let options = {};
+    for (let item in filteredQuery) {
+      switch (item) {
+        case "inStock":
+          dbQuery["laptop.stock"] = { $gt: 0 };
+          break;
+        case "min":
+          dbQuery["laptop.price"] = { $min: filteredQuery[item] };
+          break;
+        case "max":
+          dbQuery["laptop.max"] = { $max: filteredQuery[item] };
+          break;
+        case "processor":
+          dbQuery["processor.brand"] = { $in: filteredQuery[item] };
+          break;
+        case "ram":
+          dbQuery["memory.ram"] = { $in: filteredQuery[item] };
+          break;
+        case "storage":
+          dbQuery["storage.capacity"] = { $in: filteredQuery[item] };
+          break;
+        case "graphics":
+          dbQuery["graphics.size"] = { $in: filteredQuery[item] };
+          break;
+        case "brand":
+          dbQuery["laptop.brand"] = { $in: filteredQuery[item] };
+          break;
+        case "text":
+          dbQuery.dataUrl = { $regex: filteredQuery[item], $options: "i" };
+          break;
+        case "sort":
+          options.sort = { ["laptop.price"]: filteredQuery[item] };
+          break;
+      }
+    }
+    let page = query.page ?? 0;
+    let skip = page * 12;
+    let result;
+
+    result = await LaptopModel.find(dbQuery, null, options)
+      .skip(Number(skip))
+      .limit(12);
+    const count = await LaptopModel.find(dbQuery, options).countDocuments();
+
     res.send(
       ReturnMessage(false, "Found Data", { length: count, data: result })
     );
@@ -99,6 +162,7 @@ UserRoute.get("/laptop/:url", async (req, res) => {
   try {
     const dataUrl = textWash(req.params.url);
     const result = await LaptopModel.findOne({ dataUrl: dataUrl });
+    console.log(result);
     res.send(ReturnMessage(false, "found the laptop", result));
   } catch (error) {
     res.send(ReturnMessage(true, error, {}));
@@ -106,11 +170,13 @@ UserRoute.get("/laptop/:url", async (req, res) => {
 });
 UserRoute.get("/laptop_id/:id", async (req, res) => {
   try {
-    const id = textWash(req.params.id);
-    const result = await LaptopModel.findById(id);
+    const id = req.params.id;
+    const result = await LaptopModel.findOne({ _id: id });
     res.send(ReturnMessage(false, "found the laptop", result));
   } catch (error) {
-    res.send(ReturnMessage(true, error, {}));
+    res.send(
+      ReturnMessage(true, "Some error happened while loading your data", {})
+    );
   }
 });
 UserRoute.get("/orders", (req, res) => {

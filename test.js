@@ -7,7 +7,6 @@ function imgIndexGenerator(index, arr) {
   let y;
   if (arr[index]) y = 0;
   else y = arr.length;
-  console.log(y);
   return y;
 }
 
