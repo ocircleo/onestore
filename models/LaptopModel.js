@@ -5,7 +5,7 @@ const laptopSchema = new mongoose.Schema({
     brand: { type: String, required: true },
     model: { type: String, required: true },
     price: { type: Number, required: true },
-    stock: { type: Number, required: true, default: 10 },
+    stock: { type: Number, required: true, default: 10, min: 0 },
   },
   processor: {
     brand: { type: String, required: true },

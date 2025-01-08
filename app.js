@@ -11,6 +11,7 @@ const { AdminRoute } = require("./routes/Admin");
 const path = require("path");
 const LaptopModel = require("./models/LaptopModel");
 const { findByIdAndUpdate } = require("./models/UserModel");
+const { OrderRoute } = require("./routes/Order");
 const RootRouter = express.Router();
 
 //Routes separated based on their uses
@@ -19,6 +20,7 @@ RootRouter.get("/", (req, res) => {
 });
 RootRouter.use("/auth", AuthRoute);
 RootRouter.use("/user", UserRoute);
+RootRouter.use("/order", OrderRoute);
 RootRouter.use("/admin", JwtVerify, AuthorizeUser, isAdmin, AdminRoute);
 // RootRouter.get("/tem", async (req, res) => {
 //   let data = await LaptopModel.find();

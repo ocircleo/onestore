@@ -160,7 +160,6 @@ async function AuthenticateUser(req, res, next) {
       return res.status(404).send(ReturnMessage(true, "User not Found", null));
     req.user = result;
     next();
-
   } catch (error) {
     return res.status(404).send(ReturnMessage(true, error.message, null));
   }
@@ -171,6 +170,9 @@ async function isAdmin(req, res, next) {
   return res
     .status(401)
     .send(ReturnMessage(true, "401 Unauthorized Access", null));
+}
+async function isBlocked(phone = null, email = null) {
+  return true;
 }
 function JwtVerify(req, res, next) {
   let token = req.headers.authorization;
@@ -190,7 +192,7 @@ function JwtVerify(req, res, next) {
     next();
   });
 }
-module.exports = { AuthRoute, AuthorizeUser, isAdmin, JwtVerify };
+module.exports = { AuthRoute, AuthorizeUser, isAdmin, JwtVerify, isBlocked };
 function newUserGenerator(name, email, password, phone) {
   return {
     name: name,

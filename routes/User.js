@@ -57,10 +57,10 @@ UserRoute.get("/search", async (req, res) => {
           dbQuery["laptop.stock"] = { $gt: 0 };
           break;
         case "min":
-          dbQuery["laptop.price"] = { $min: filteredQuery[item] };
+          dbQuery["laptop.price"] = { $gt: Number(filteredQuery[item]) };
           break;
         case "max":
-          dbQuery["laptop.max"] = { $max: filteredQuery[item] };
+          dbQuery["laptop.max"] = { $lt: Number(filteredQuery[item]) };
           break;
         case "processor":
           dbQuery["processor.brand"] = { $in: filteredQuery[item] };
@@ -85,6 +85,7 @@ UserRoute.get("/search", async (req, res) => {
           break;
       }
     }
+    console.log(dbQuery);
     let page = query.page ?? 0;
     let skip = page * 12;
     let result;
@@ -162,7 +163,6 @@ UserRoute.get("/laptop/:url", async (req, res) => {
   try {
     const dataUrl = textWash(req.params.url);
     const result = await LaptopModel.findOne({ dataUrl: dataUrl });
-    console.log(result);
     res.send(ReturnMessage(false, "found the laptop", result));
   } catch (error) {
     res.send(ReturnMessage(true, error, {}));
