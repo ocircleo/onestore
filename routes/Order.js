@@ -44,7 +44,7 @@ OrderRoute.post("/newOrder", JwtVerify, AuthorizeUser, async (req, res) => {
       totalPrice,
       userPhone: req.user.phone,
       orderDate: date,
-      shipmentDate: date
+      shipmentDate: date,
     };
     if (paymentMethod == "COD") {
       let newOrder = new OrderModel(orderSummery);
@@ -66,6 +66,17 @@ OrderRoute.get("/myOrders/:phone", async (req, res) => {
   const phone = req.params.phone;
   try {
     let result = await OrderModel.find({ phone: phone, canceled: false });
+    if (result) res.send(ReturnMessage(false, "found items", result));
+    else res.send(ReturnMessage(true, "No data found", []));
+  } catch (error) {
+    console.log(error);
+    res.send(ReturnMessage(true, error.message, []));
+  }
+});
+OrderRoute.get("/myOrdersPaid/:phone", async (req, res) => {
+  const phone = req.params.phone;
+  try {
+    let result = await OrderModel.find({ phone: phone, completed: true });
     if (result) res.send(ReturnMessage(false, "found items", result));
     else res.send(ReturnMessage(true, "No data found", []));
   } catch (error) {
@@ -112,16 +123,18 @@ OrderRoute.put(
   async (req, res) => {
     try {
       let { id, shipmentDate, orderStatus, paid, orderMessage } = req.body;
-      const result = await OrderModel.findByIdAndUpdate(
-        id,
-        {
-          shipmentDate: shipmentDate,
-          orderStatus: orderStatus,
-          paid: paid,
-          orderMessage: orderMessage,
-        },
-        { new: true }
-      );
+      let orderUpdate = {
+        shipmentDate: shipmentDate,
+        orderStatus: orderStatus,
+        paid: paid,
+        orderMessage: orderMessage,
+      };
+      let order = await OrderModel.findById(id);
+      if (paid >= order.paid) orderUpdate.completed = true;
+    
+      const result = await OrderModel.findByIdAndUpdate(id, orderUpdate, {
+        new: true,
+      });
       if (result)
         return res.send(ReturnMessage(false, "Updated Successful", result));
       res.send(ReturnMessage(true, "Error happened", {}));

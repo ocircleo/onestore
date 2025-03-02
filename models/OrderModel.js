@@ -40,6 +40,7 @@ const orderSchema = new mongoose.Schema({
   canceledBy: { type: String, default: "" },
   userPhone: { type: String, required: true },
   paid: { type: Number, default: 0, required: true },
+  completed: { type: Boolean, default: false },
 });
 
 const OrderModel = mongoose.model("orders", orderSchema);

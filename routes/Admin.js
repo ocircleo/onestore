@@ -2,6 +2,7 @@ const express = require("express");
 const LaptopModel = require("../models/LaptopModel");
 const { ReturnMessage, GenerateDataUrl, textWash } = require("../utilities");
 const UserModel = require("../models/UserModel");
+const MessageModel = require("../models/MessageModel");
 const AdminRoute = express.Router();
 
 AdminRoute.post("/add_product", async (req, res) => {
@@ -205,7 +206,7 @@ AdminRoute.put("/upload-image", async (req, res) => {
     let UpdateIndex = 0;
 
     let result = await LaptopModel.findById(id);
-   
+
     if (result.images[Number(index)]) UpdateIndex = index;
     else UpdateIndex = result.images.length;
     const imageArr = result.images;
@@ -237,11 +238,11 @@ AdminRoute.put("/delete-image", async (req, res) => {
 
     let result = await LaptopModel.findById(id);
     const imageArr = result.images;
-    
-    let newArray = []
-    for(let i = 0; i < imageArr.length;i++){
-    if(imageArr[i] == url) continue;
-    newArray.push(imageArr[i]);    
+
+    let newArray = [];
+    for (let i = 0; i < imageArr.length; i++) {
+      if (imageArr[i] == url) continue;
+      newArray.push(imageArr[i]);
     }
     result = await LaptopModel.findByIdAndUpdate(
       id,
@@ -264,8 +265,48 @@ AdminRoute.put("/delete-image", async (req, res) => {
     res.send(ReturnMessage(true, error.message, null));
   }
 });
-AdminRoute.get("/order/:id", (req, res) => {
-  res.send("Welcome to the root of the application");
+AdminRoute.get("/messages", async (req, res) => {
+  try {
+    const { state, page } = req.query;
+    let skip = page * 12;
+    let result = await MessageModel.find({ state }).skip(skip);
+    let length = await MessageModel.find({ state }).countDocuments();
+    if (result)
+      return res.send(
+        ReturnMessage(false, "Found Data", { data: result, length })
+      );
+    res.send(
+      ReturnMessage(
+        true,
+        "Sorry some error happened while performing action",
+        []
+      )
+    );
+  } catch (error) {
+    res.send(ReturnMessage(true, error.message, []));
+  }
+});
+AdminRoute.put("/messageReplied/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    let result = await MessageModel.findByIdAndUpdate(id, { state: "replied" });
+    if (result)
+      return res.send(ReturnMessage(false, "Successfully Replied", result));
+    res.send(ReturnMessage(true, "Sorry some error happened ", {}));
+  } catch (error) {
+    res.send(ReturnMessage(true, error.message, {}));
+  }
+});
+AdminRoute.delete("/deleteMessage/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    let result = await MessageModel.findByIdAndDelete(id);
+    if (result)
+      return res.send(ReturnMessage(false, "Successfully Deleted", result));
+    res.send(ReturnMessage(true, "Sorry some error happened ", {}));
+  } catch (error) {
+    res.send(ReturnMessage(true, error.message, {}));
+  }
 });
 AdminRoute.put("/update_order", (req, res) => {
   res.send("Welcome to the root of the application");

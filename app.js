@@ -22,6 +22,11 @@ RootRouter.use("/auth", AuthRoute);
 RootRouter.use("/user", UserRoute);
 RootRouter.use("/order", OrderRoute);
 RootRouter.use("/admin", JwtVerify, AuthorizeUser, isAdmin, AdminRoute);
+RootRouter.get("/error",(req,res)=>{
+   res.sendFile(
+      path.join(__dirname, "public", "pages", "notFound", "index.html")
+    );
+})
 // RootRouter.get("/tem", async (req, res) => {
 //   let data = await LaptopModel.find();
 //   data = JSON.stringify(data);

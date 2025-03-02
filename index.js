@@ -32,9 +32,7 @@ mongoose
 app.use("/", pathMiddleware, RootRouter);
 //Not Found Page
 app.use("*", pathMiddleware, (req, res) => {
-  res.sendFile(
-    path.join(__dirname, "public", "pages", "notFound", "index.html")
-  );
+  return { error: true, message: "API Path not found", data: {} };
 });
 
 //listen to port

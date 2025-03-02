@@ -8,6 +8,7 @@ const {
 const LaptopModel = require("../models/LaptopModel");
 const { JwtVerify, AuthorizeUser } = require("./Auth");
 const UserModel = require("../models/UserModel");
+const MessageModel = require("../models/MessageModel");
 const UserRoute = express.Router();
 
 UserRoute.get("/cart", (req, res) => {
@@ -60,7 +61,7 @@ UserRoute.get("/search", async (req, res) => {
           dbQuery["laptop.price"] = { $gt: Number(filteredQuery[item]) };
           break;
         case "max":
-          dbQuery["laptop.max"] = { $lt: Number(filteredQuery[item]) };
+          dbQuery["laptop.price"] = { $lt: Number(filteredQuery[item]) };
           break;
         case "processor":
           dbQuery["processor.brand"] = { $in: filteredQuery[item] };
@@ -85,7 +86,6 @@ UserRoute.get("/search", async (req, res) => {
           break;
       }
     }
-    console.log(dbQuery);
     let page = query.page ?? 0;
     let skip = page * 12;
     let result;
@@ -179,8 +179,20 @@ UserRoute.get("/laptop_id/:id", async (req, res) => {
     );
   }
 });
-UserRoute.get("/orders", (req, res) => {
-  res.send("Welcome to the root of the application");
+UserRoute.post("/sendMessage", async (req, res) => {
+  try {
+    let { name, email, message } = req.body;
+    let newMessage = new MessageModel({
+      name: textWash(name),
+      email: textWash(email),
+      message: textWash(message),
+    });
+    let result = await newMessage.save();
+    if (result) return res.send(ReturnMessage(false, "Successful", result));
+    res.send(ReturnMessage(true, error.message, {}));
+  } catch (error) {
+    res.send(ReturnMessage(true, error.message, {}));
+  }
 });
 UserRoute.get("/payments", (req, res) => {
   res.send("Welcome to the root of the application");
