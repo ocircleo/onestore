@@ -3,6 +3,8 @@ const LaptopModel = require("../models/LaptopModel");
 const { ReturnMessage, GenerateDataUrl, textWash } = require("../utilities");
 const UserModel = require("../models/UserModel");
 const MessageModel = require("../models/MessageModel");
+const { v4: uuidv4 } = require("uuid");
+const AnyModel = require("../models/AnyModel");
 const AdminRoute = express.Router();
 
 AdminRoute.post("/add_product", async (req, res) => {
@@ -20,7 +22,18 @@ AdminRoute.post("/add_product", async (req, res) => {
     res.send(ReturnMessage(true, error.message));
   }
 });
+AdminRoute.post("/add_product_any", async (req, res) => {
+  let product = req.body;
+  product.dataUrl = GenerateDataUrl(textWash(product.title), uuidv4());
 
+  try {
+    let newProduct = new AnyModel(product);
+    let result = await newProduct.save();
+    res.send(ReturnMessage(false, "Successfully Product Added", result));
+  } catch (error) {
+    res.send(ReturnMessage(true, error.message));
+  }
+});
 AdminRoute.put("/update_product", async (req, res) => {
   let laptop = req.body;
 
@@ -31,9 +44,26 @@ AdminRoute.put("/update_product", async (req, res) => {
     });
     if (result)
       return res.send(
-        ReturnMessage(false, "Successfuly Laptop updated  ", result)
+        ReturnMessage(false, "Successfully Laptop updated  ", result)
       );
     res.send(ReturnMessage(true, "Sorry No Laptop Found ", null));
+  } catch (error) {
+    res.send(ReturnMessage(true, error.message, null));
+  }
+});
+AdminRoute.put("/update_any_product", async (req, res) => {
+  let item = req.body;
+
+  try {
+    let result = await AnyModel.findByIdAndUpdate(item._id, item, {
+      new: true,
+      runValidators: true,
+    });
+    if (result)
+      return res.send(
+        ReturnMessage(false, "Successful item updated  ", result)
+      );
+    res.send(ReturnMessage(true, "Sorry No item Found ", null));
   } catch (error) {
     res.send(ReturnMessage(true, error.message, null));
   }
@@ -49,6 +79,22 @@ AdminRoute.delete("/delete_product", async (req, res) => {
       );
     res.send(
       ReturnMessage(true, "Sorry No Laptop Found or failed to delete", null)
+    );
+  } catch (error) {
+    res.send(ReturnMessage(true, error.message));
+  }
+});
+AdminRoute.delete("/delete_any_product", async (req, res) => {
+  let { id } = req.body;
+
+  try {
+    let result = await AnyModel.findByIdAndDelete(id);
+    if (result)
+      return res.send(
+        ReturnMessage(false, "item deleted successfully ", result)
+      );
+    res.send(
+      ReturnMessage(true, "Sorry No item Found or failed to delete", null)
     );
   } catch (error) {
     res.send(ReturnMessage(true, error.message));
@@ -202,20 +248,29 @@ AdminRoute.put("/enable_user", async (req, res) => {
 });
 AdminRoute.put("/upload-image", async (req, res) => {
   try {
-    const { id, url, index } = req.body;
+    const { id, url, index, type } = req.body;
     let UpdateIndex = 0;
 
-    let result = await LaptopModel.findById(id);
+    let result;
+    if (type == "laptop") result = await LaptopModel.findById(id);
+    else result = await AnyModel.findById(id);
 
     if (result.images[Number(index)]) UpdateIndex = index;
     else UpdateIndex = result.images.length;
     const imageArr = result.images;
     imageArr[UpdateIndex] = url;
-    result = await LaptopModel.findByIdAndUpdate(
-      id,
-      { images: imageArr },
-      { new: true }
-    );
+    if (type == "laptop")
+      result = await LaptopModel.findByIdAndUpdate(
+        id,
+        { images: imageArr },
+        { new: true }
+      );
+    else
+      result = await AnyModel.findByIdAndUpdate(
+        id,
+        { images: imageArr },
+        { new: true }
+      );
 
     if (result)
       return res.send(

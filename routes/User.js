@@ -9,6 +9,7 @@ const LaptopModel = require("../models/LaptopModel");
 const { JwtVerify, AuthorizeUser } = require("./Auth");
 const UserModel = require("../models/UserModel");
 const MessageModel = require("../models/MessageModel");
+const AnyModel = require("../models/AnyModel");
 const UserRoute = express.Router();
 
 UserRoute.get("/cart", (req, res) => {
@@ -159,6 +160,34 @@ UserRoute.get("/search_items_admin", async (req, res) => {
     res.send(ReturnMessage(false, error.message, []));
   }
 });
+UserRoute.get("/search_any_items_admin", async (req, res) => {
+  try {
+    let { text = "", page = 0, stock = null, sort = 0 } = req.query;
+    text = textWashRegex(text);
+    let skip = page * 12;
+    const expression = new RegExp(text, "i");
+    let result;
+    let query = {};
+    if (text) query["title"] = { $regex: expression };
+    if (stock == "in") query["stock"] = { $gt: 0 };
+    if (stock == "out") query["stock"] = 0;
+    if (Number(sort) == 0)
+      result = await AnyModel.find(query).limit(12).skip(Number(skip));
+    else
+      result = await AnyModel.find(query)
+        .sort({ price: Number(sort) })
+        .skip(Number(skip))
+        .limit(12);
+
+    const count = await AnyModel.find(query).countDocuments();
+    res.send(
+      ReturnMessage(false, "data found", { length: count, data: result })
+    );
+  } catch (error) {
+    console.log(error.message);
+    res.send(ReturnMessage(false, error.message, []));
+  }
+});
 UserRoute.get("/laptop/:url", async (req, res) => {
   try {
     const dataUrl = textWash(req.params.url);
@@ -172,6 +201,17 @@ UserRoute.get("/laptop_id/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const result = await LaptopModel.findOne({ _id: id });
+    res.send(ReturnMessage(false, "found the laptop", result));
+  } catch (error) {
+    res.send(
+      ReturnMessage(true, "Some error happened while loading your data", {})
+    );
+  }
+});
+UserRoute.get("/item_id/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await AnyModel.findOne({ _id: id });
     res.send(ReturnMessage(false, "found the laptop", result));
   } catch (error) {
     res.send(
