@@ -3,7 +3,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 const cors = require("cors");
 const path = require("path");
-const { pathMiddleware } = require("./utilities");
+const { pathMiddleware, ReturnMessage } = require("./utilities");
 const { RootRouter } = require("./app");
 const { default: mongoose } = require("mongoose");
 
@@ -30,7 +30,7 @@ app.listen(port, () => {
 });
 
 async function mongooseConnection(req, res, next) {
-  console.log(mongoose.connection.readyState);
+  console.log("mongoose connected : ", Boolean(mongoose.connection.readyState));
   // mongoose
   //   .connect("mongodb://localhost:27017/tooltip")
   //   .then(() => console.log("connected to local db"));
@@ -46,5 +46,4 @@ async function mongooseConnection(req, res, next) {
         .status(5001)
         .send(ReturnMessage(true, "Failed to connect to mongodb", null));
     });
-
 }

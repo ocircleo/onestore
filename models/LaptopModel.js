@@ -39,7 +39,7 @@ const laptopSchema = new mongoose.Schema({
   networkAndConnectivity: { type: String },
   os: { type: String },
   battery: { type: String },
-
+  category: { type: String, required: true, default: "laptop" },
   physicalSpecification: {
     color: { type: String, required: true },
     weight: { type: String },

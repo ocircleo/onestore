@@ -21,6 +21,7 @@ const ProductSchema = new Schema({
   category: {
     type: String,
     required: true,
+    default:"general",
     trim: true,
   },
   stock: {

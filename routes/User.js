@@ -10,6 +10,7 @@ const { JwtVerify, AuthorizeUser } = require("./Auth");
 const UserModel = require("../models/UserModel");
 const MessageModel = require("../models/MessageModel");
 const AnyModel = require("../models/AnyModel");
+const ImgModel = require("../models/ImageModel");
 const UserRoute = express.Router();
 
 UserRoute.get("/cart", (req, res) => {
@@ -88,12 +89,12 @@ UserRoute.get("/search", async (req, res) => {
       }
     }
     let page = query.page ?? 0;
-    let skip = page * 12;
+    let skip = page * 15;
     let result;
 
     result = await LaptopModel.find(dbQuery, null, options)
       .skip(Number(skip))
-      .limit(12);
+      .limit(15);
     const count = await LaptopModel.find(dbQuery, options).countDocuments();
 
     res.send(
@@ -102,6 +103,95 @@ UserRoute.get("/search", async (req, res) => {
   } catch (error) {
     console.log(error.message);
     res.send(ReturnMessage(true, error.message, { length: 0, data: [] }));
+  }
+});
+UserRoute.get("/search_any", async (req, res) => {
+  try {
+    let { text = "", page = 0, stock = null, sort = 0 } = req.query;
+    text = textWashRegex(text);
+    let skip = page * 15;
+    const expression = new RegExp(text, "i");
+    let finalResult, result1, result2;
+    let generalQuery = {};
+    let laptopQuery = {};
+    // let generalOptions = { limit: 15, skip: Number(skip) };
+    // let laptopOptions = { limit: 15, skip: Number(skip) };
+    if (text) {
+      generalQuery["dataUrl"] = { $regex: expression };
+      laptopQuery["dataUrl"] = { $regex: expression };
+    }
+    if (stock == "in") {
+      generalQuery["stock"] = { $gt: 0 };
+      laptopQuery["laptop.stock"] = { $gt: 0 };
+    }
+    if (stock == "out") {
+      generalQuery["stock"] = { $lt: 1 };
+      laptopQuery["laptop.stock"] = { $lt: 1 };
+    }
+    const count1 = await AnyModel.find(generalQuery).countDocuments();
+    const count2 = await LaptopModel.find(laptopQuery).countDocuments();
+    // let limit1 = count1 > 6 ? 6 : count1;
+    // let limit2 = 15 - limit1;
+    // generalOptions.limit = limit1;
+    // laptopOptions.limit = limit2;
+    // if (Boolean(Number(sort))) {
+    // generalOptions.sort = { price: Number(sort) };
+    // laptopOptions.sort = { ["laptop.price"]: Number(sort) };
+    // }
+
+    result1 = await AnyModel.find(generalQuery);
+    result2 = await LaptopModel.find(laptopQuery);
+    finalResult = [...result1, ...result2];
+
+    finalResult = finalResult.sort((a, b) => {
+      if (a["dataUrl"] < b["dataUrl"]) return -1;
+      if (a["dataUrl"] > b["dataUrl"]) return 1;
+      return 0;
+    });
+    if (Number(sort) == 1) {
+      finalResult = finalResult.sort((a, b) => {
+        let aPrice = a["laptop"] ? a["laptop"]["price"] : a["price"];
+        let bPrice = b["laptop"] ? b["laptop"]["price"] : b["price"];
+        if (aPrice < bPrice) return -1;
+        if (aPrice > bPrice) return 1;
+        return 0;
+      });
+    }else if (Number(sort) == -1) {
+      finalResult = finalResult.sort((a, b) => {
+        let aPrice = a["laptop"] ? a["laptop"]["price"] : a["price"];
+        let bPrice = b["laptop"] ? b["laptop"]["price"] : b["price"];
+        if (aPrice < bPrice) return 1;
+        if (aPrice > bPrice) return -1;
+        return 0;
+      });
+    }
+    console.log(finalResult.length);
+    finalResult = finalResult.slice(Number(skip), Number(skip) + 15);
+
+    res.send(
+      ReturnMessage(false, "data found", {
+        length: count1 + count2,
+        data: finalResult,
+      })
+    );
+  } catch (error) {
+    console.log(error.message);
+    res.send(ReturnMessage(true, error.message, { length: 0, data: [] }));
+    /**
+     * function sortArrayByTextAndPrice(array, text, price) {
+  // First sort by text
+  array.sort((a, b) => {
+    if (a[text] < b[text]) return -1;
+    if (a[text] > b[text]) return 1;
+    return 0;
+  });
+
+  // Then sort by price
+  array.sort((a, b) => a[price] - b[price]);
+
+  return array;
+}
+     */
   }
 });
 UserRoute.get("/search_users_admin", async (req, res) => {
@@ -197,6 +287,20 @@ UserRoute.get("/laptop/:url", async (req, res) => {
     res.send(ReturnMessage(true, error, {}));
   }
 });
+UserRoute.get("/item/:url", async (req, res) => {
+  try {
+    const dataUrl = textWash(req.params.url);
+    const laptopResult = await LaptopModel.findOne({ dataUrl: dataUrl });
+    if (laptopResult)
+      return res.send(ReturnMessage(false, "found the laptop", laptopResult));
+    const itemResult = await AnyModel.findOne({ dataUrl: dataUrl });
+    if (itemResult)
+      return res.send(ReturnMessage(false, "found the Item", itemResult));
+    res.send(ReturnMessage(true, "Item was not found", result));
+  } catch (error) {
+    res.send(ReturnMessage(true, error, {}));
+  }
+});
 UserRoute.get("/laptop_id/:id", async (req, res) => {
   try {
     const id = req.params.id;
@@ -211,14 +315,22 @@ UserRoute.get("/laptop_id/:id", async (req, res) => {
 UserRoute.get("/item_id/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    const result = await AnyModel.findOne({ _id: id });
-    res.send(ReturnMessage(false, "found the laptop", result));
+    const laptopResult = await LaptopModel.findOne({ _id: id });
+    if (laptopResult)
+      return res.send(ReturnMessage(false, "found the laptop", laptopResult));
+    const itemResult = await AnyModel.findOne({ _id: id });
+    if (itemResult)
+      return res.send(ReturnMessage(false, "found the laptop", itemResult));
+    res.send(
+      ReturnMessage(true, "Some error happened while loading your data", {})
+    );
   } catch (error) {
     res.send(
       ReturnMessage(true, "Some error happened while loading your data", {})
     );
   }
 });
+
 UserRoute.post("/sendMessage", async (req, res) => {
   try {
     let { name, email, message } = req.body;
@@ -262,6 +374,18 @@ UserRoute.put("/update_profile", JwtVerify, AuthorizeUser, async (req, res) => {
     res.send(ReturnMessage(true, "Failed to update profile"));
   } catch (error) {
     return res.send(ReturnMessage(true, error.message));
+  }
+});
+UserRoute.get("/get_landing_img", async (req, res) => {
+  try {
+    const result = await ImgModel.find();
+    if (result.length > 0)
+      return res.send(
+        ReturnMessage(false, "Landing images retrieved successfully", result)
+      );
+    res.send(ReturnMessage(false, "found none", null));
+  } catch (error) {
+    res.send(ReturnMessage(true, error.message, null));
   }
 });
 module.exports = { UserRoute };

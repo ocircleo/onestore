@@ -4,6 +4,7 @@ const LaptopModel = require("../models/LaptopModel");
 const OrderModel = require("../models/OrderModel");
 const { ReturnMessage } = require("../utilities");
 const { JwtVerify, AuthorizeUser, isAdmin } = require("./Auth");
+const AnyModel = require("../models/AnyModel");
 const OrderRoute = express.Router();
 OrderRoute.post("/newOrder", JwtVerify, AuthorizeUser, async (req, res) => {
   try {
@@ -22,12 +23,23 @@ OrderRoute.post("/newOrder", JwtVerify, AuthorizeUser, async (req, res) => {
       try {
         let id = item.itemId;
         let result = await LaptopModel.findById(id);
-        if (result.laptop.stock < 1) continue;
-        totalPrice += item.quantity * result.laptop.price;
+        if (!result) result = await AnyModel.findById(id);
+        if (!result) continue;
+        let stock = 0,
+          price = 1;
+        if (result.category == "laptop") {
+          stock = result.laptop.stock;
+          price = result.laptop.price;
+        } else {
+          stock = result.stock;
+          price = result.price;
+        }
+        if (stock < 1) continue;
+        totalPrice += item.quantity * price;
         let temObj = {
           itemId: id,
           quantity: item.quantity,
-          price: result.laptop.price,
+          price: price,
         };
         orderItemDataArray.push(temObj);
       } catch (error) {
@@ -131,7 +143,7 @@ OrderRoute.put(
       };
       let order = await OrderModel.findById(id);
       if (paid >= order.paid) orderUpdate.completed = true;
-    
+
       const result = await OrderModel.findByIdAndUpdate(id, orderUpdate, {
         new: true,
       });

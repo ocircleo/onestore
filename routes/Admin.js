@@ -5,6 +5,7 @@ const UserModel = require("../models/UserModel");
 const MessageModel = require("../models/MessageModel");
 const { v4: uuidv4 } = require("uuid");
 const AnyModel = require("../models/AnyModel");
+const ImgModel = require("../models/ImageModel");
 const AdminRoute = express.Router();
 
 AdminRoute.post("/add_product", async (req, res) => {
@@ -320,6 +321,37 @@ AdminRoute.put("/delete-image", async (req, res) => {
     res.send(ReturnMessage(true, error.message, null));
   }
 });
+
+AdminRoute.put("/upload_landing_img", async (req, res) => {
+  try {
+    const { imageUrl, targetLink } = req.body;
+
+    const newLandingImage = new ImgModel({ imageUrl, targetLink });
+
+    const result = await newLandingImage.save();
+    res.send(
+      ReturnMessage(false, "Landing image added successfully", result)
+    );
+  } catch (error) {
+    res.send(ReturnMessage(true, error.message, null));
+  }
+});
+AdminRoute.delete("/delete_landing_img", async (req, res) => {
+  try {
+    const { id } = req.body;
+    const result = await ImgModel.findByIdAndDelete(id);
+    if (result)
+      return res.send(
+        ReturnMessage(false, "Landing image deleted successfully", result)
+      );
+    res.send(
+      ReturnMessage(true, "No landing image found or failed to delete", null)
+    );
+  } catch (error) {
+    res.send(ReturnMessage(true, error.message, null));
+  }
+});
+
 AdminRoute.get("/messages", async (req, res) => {
   try {
     const { state, page } = req.query;
